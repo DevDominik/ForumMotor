@@ -20,6 +20,8 @@ namespace ForumMotor_13BC_H.Pages
         }
         [BindProperty(SupportsGet = true)]
         public int TopicId { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int PostId { get; set; }
         public IList<Post> Post { get;set; } = default!;
         public Category Category { get; set; }
         public Topic Topic { get; set; }
