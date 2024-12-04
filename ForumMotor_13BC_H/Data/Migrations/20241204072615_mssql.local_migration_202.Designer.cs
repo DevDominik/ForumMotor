@@ -4,6 +4,7 @@ using ForumMotor_13BC_H.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumMotor_13BC_H.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241204072615_mssql.local_migration_202")]
+    partial class mssqllocal_migration_202
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,32 +50,6 @@ namespace ForumMotor_13BC_H.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("ForumMotor_13BC_H.Models.LikeDislike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Like")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("LikeDislikes");
                 });
 
             modelBuilder.Entity("ForumMotor_13BC_H.Models.Post", b =>
@@ -381,23 +358,6 @@ namespace ForumMotor_13BC_H.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ForumMotor_13BC_H.Models.LikeDislike", b =>
-                {
-                    b.HasOne("ForumMotor_13BC_H.Models.Post", "Post")
-                        .WithMany("LikeDislikes")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ForumMotor_13BC_H.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ForumMotor_13BC_H.Models.Post", b =>
                 {
                     b.HasOne("ForumMotor_13BC_H.Models.Topic", "Topic")
@@ -490,11 +450,6 @@ namespace ForumMotor_13BC_H.Data.Migrations
             modelBuilder.Entity("ForumMotor_13BC_H.Models.Category", b =>
                 {
                     b.Navigation("Topics");
-                });
-
-            modelBuilder.Entity("ForumMotor_13BC_H.Models.Post", b =>
-                {
-                    b.Navigation("LikeDislikes");
                 });
 
             modelBuilder.Entity("ForumMotor_13BC_H.Models.Topic", b =>

@@ -14,6 +14,7 @@ namespace ForumMotor_13BC_H.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<LikeDislike> LikeDislikes { get; set; }
         
     }
 }
