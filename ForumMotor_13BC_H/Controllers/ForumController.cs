@@ -57,12 +57,26 @@ namespace ForumMotor_13BC_H.Controllers
             Topic topic = post.Topic;
             if (topic.IsLocked)
             {
-                return Forbid(topic.LockReason != null ? topic.LockReason : "No reason was given.");
+                return Forbid();
             }
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetPost", new {id = post.Id}, post);
         }
-
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> LockTopic(int id, string lockReason)
+        {
+            var topic = await _context.Topics.FindAsync(id);
+            if (topic == null) { return NotFound(); }
+            if (topic.IsLocked)
+            {
+                return Forbid();
+            }
+            topic.IsLocked = true;
+            topic.LockReason = lockReason;
+            _context.Topics.Entry(topic).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
