@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ForumMotor_13BC_H.Data;
 using ForumMotor_13BC_H.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ForumMotor_13BC_H.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ForumMotor_13BC_H.Data.ApplicationDbContext _context;
